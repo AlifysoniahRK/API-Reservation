@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Supprimer une réservation</title>
+</head>
+<body>
+
+    <h1>Supprimer une réservation</h1>
+
+    <label>Numéro de la réservation :</label>
+    <input type="number" id="id">
+
+    <button onclick="supprimerReservation()">Supprimer</button>
+
+    <script>
+        function supprimerReservation() {
+
+            const id = document.getElementById("id").value;
+
+            fetch(`http://localhost:3000/reservations/${id}`, {
+                method: 'DELETE'
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                alert(data.message);
+            });
+        }
+    </script>
+
+</body>
+</html>

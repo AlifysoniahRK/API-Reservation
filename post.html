@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Nouvelle réservation</title>
+</head>
+<body>
+
+    <h1>Créer une réservation</h1>
+
+    <label>Client :</label>
+    <input type="text" id="client">
+    <br><br>
+
+    <label>Voiture :</label>
+    <input type="text" id="voiture">
+    <br><br>
+
+    <label>Date :</label>
+    <input type="date" id="date">
+    <br><br>
+
+    <button onclick="envoyerReservation()">Envoyer</button>
+
+    <script>
+        function envoyerReservation() {
+
+            const client = document.getElementById("client").value;
+            const voiture = document.getElementById("voiture").value;
+            const date = document.getElementById("date").value;
+
+            fetch('http://localhost:3000/reservations', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    client: client,
+                    voiture: voiture,
+                    date: date
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                alert(data.message);
+            });
+        }
+    </script>
+
+</body>
+</html>

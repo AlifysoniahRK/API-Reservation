@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Test API</title>
+</head>
+<body>
+
+    <h1>Liste des réservations</h1>
+
+    <div id="resultat"></div>
+
+    <script>
+        fetch('http://localhost:3000/reservations')
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+
+                data.forEach(reservation => {
+                    document.getElementById('resultat').innerHTML += `
+                        <p>
+                            Client : ${reservation.client}<br>
+                            Voiture : ${reservation.voiture}<br>
+                            Date : ${reservation.date}
+                        </p>
+                        <hr>
+                    `;
+                });
+            });
+    </script>
+
+</body>
+</html>
